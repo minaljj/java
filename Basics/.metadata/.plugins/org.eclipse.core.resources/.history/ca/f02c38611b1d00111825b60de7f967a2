@@ -1,0 +1,29 @@
+package ems;
+
+public class PermanentEmplyoee implements Emplyoee {
+
+	@Override
+	public void Hire() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void terminate() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void getHistory() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void getcurrent() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

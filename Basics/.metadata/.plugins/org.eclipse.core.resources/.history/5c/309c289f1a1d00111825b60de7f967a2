@@ -1,0 +1,8 @@
+package ems;
+
+public interface Employee {
+	void Hire();
+	void Terminate();
+	void getHistory();
+	void getCurrent();
+}

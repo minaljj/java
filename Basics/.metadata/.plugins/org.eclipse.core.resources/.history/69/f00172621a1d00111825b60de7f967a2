@@ -1,0 +1,11 @@
+package day2;
+
+public class Cat implements Pet {
+
+	@Override
+	public void play() {
+		// TODO Auto-generated method stub
+
+	}
+
+}
