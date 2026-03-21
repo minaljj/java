@@ -1,6 +1,5 @@
 package com.tek.lms;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,29 +16,28 @@ class Library {
 		books.add(book);
 	}
 
-	void reserve(String title) {
-		try {
-			for (Book b : books) {
-				if (b.title.equals(title) && b.getStatus() == STATUS.AVAILABLE) {
-					b.setStatus(STATUS.BOOKED);
-					System.out.println("Borrowed: " + title);
-					return;
-				}
-		
-			else {
-		    BookAvailability(title);
+	void reserve(String title) throws BookNotAvailableException {
+
+		if (title == null || title.trim().isEmpty()) {
+			throw new IllegalArgumentException("Title cannot be null");
+		}
+
+		for (Book b : books) {
+			if (b.title.equals(title) && b.getStatus() == STATUS.AVAILABLE) {
+				b.setStatus(STATUS.BOOKED);
+				System.out.println("Borrowed: " + title);
+				return;
 			}
+		}
+		BookAvailability(title);
+
+	}
+
+	private static void BookAvailability(String title) throws BookNotAvailableException {
+		for (Book b : books) {
+			if (b.title.equals(title) && b.getStatus() != STATUS.AVAILABLE) {
+				throw new BookNotAvailableException("Book is not available");
 			}
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		}
-		private static void BookAvailability(String title) throws BookNotAvailableException {
-		for(Book b: books) {
-		if(b.title.equals(title) && b.getStatus()!=STATUS.AVAILABLE) {
-			throw new BookNotAvailableException("Book is not available");
-		}
 		}
 
 	}
