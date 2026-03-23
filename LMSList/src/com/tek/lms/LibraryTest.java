@@ -56,7 +56,7 @@ class LibraryTest {
 		Book book = new Book("1", "Learn Java", 234.5f, "xyz");
 		library.books.add(book);
 		book.setStatus(STATUS.AVAILABLE);
-		assertDoesNotThrow(BookNotAvailableException.class, ()->library.reserve("Learn Java"));
+		 assertDoesNotThrow(() -> library.reserve("Learn Java"));
 		
 	}
 
