@@ -52,7 +52,7 @@ public class LogAnalyzerTest {
 
         LogAnalyzer analyzer = new LogAnalyzer("System.log");
         Map<String, Integer> result = analyzer.analyze();
-       
+
         assertEquals(1, result.get("INFO"));
         assertEquals(1, result.get("WARNING"));
         assertEquals(0, result.get("ERROR"));
@@ -60,7 +60,9 @@ public class LogAnalyzerTest {
 
     @Test
     void testMissingFileThrowsException() {
+
         LogAnalyzer analyzer = new LogAnalyzer("missingFile.log");
+
         assertThrows(RuntimeException.class, () -> analyzer.analyze());
     }
 }
