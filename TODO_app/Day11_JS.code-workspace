@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../Day11_JS"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Day11_JS"
+	}
+}
