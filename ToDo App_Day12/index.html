@@ -9,10 +9,26 @@
 
 
 <body>
-    <h2>TODO App</h2>
-    <input type="text" id="todo-input" placeholder="Enter Task">
-    <button onclick="addTODO()">Add</button>
-    <ul id="todo-list"></ul>
+    <div>
+        <h2>TODO App</h2>
+
+        <input type="text" id="todo-input" placeholder="Enter Task">
+        <input type="number" id="todo-time" placeholder="Enter Time">
+        <button onclick="addTODO()">Add</button>
+
+
+        <div class="priority">
+            <label>
+                <input type="radio" name="priority" value="urgent">urgent
+
+            </label>
+            <label>
+                <input type="radio" name="priority" value="normal" checked>Not urgent
+
+            </label>
+        </div>
+        <ul id="todo-list"></ul>
+    </div>
 </body>
 <script src="app.js"></script>
 

@@ -5,12 +5,16 @@ let todos = JSON.parse(localStorage.getItem('todos')) || []
 
         function addTODO() {
             const input = document.getElementById("todo-input");
+            const timeinput = document.getElementById("todo-time");
+            const priority=document.querySelector('input[name="priority"]:checked').value;
             const text = input.value.trim();
+            const time = timeinput.value.trim();
 
             if (text == '') return;
-            todos.push({ text, completed: false });
+            todos.push({ text,time,priority, completed: false });
 
             input.value = '';
+            timeinput.value='';
             saveTodos();
             renderTodos();
         }
@@ -39,7 +43,7 @@ let todos = JSON.parse(localStorage.getItem('todos')) || []
                     li.classList.add('completed');
 
                 li.innerHTML = `
-            <span>${todo.text}</span> <!-- FIXED syntax -->
+            <span>${todo.text} ${todo.time ? "("+todo.time+"  hours) ":"" } ${todo.priority}</span> <!-- FIXED syntax -->
             <div>
                 <button onclick="toggleComplete(${index})">✔</button> 
                 <button onclick="deleteTODO(${index})">✖</button> <!-- FIXED name -->
