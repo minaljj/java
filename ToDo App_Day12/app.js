@@ -1,4 +1,5 @@
 let todos = JSON.parse(localStorage.getItem('todos')) || []
+const errorDiv = document.getElementById('error');
 function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos))
 }
@@ -10,7 +11,9 @@ function addTODO() {
     const text = input.value.trim();
     const time = timeinput.value.trim();
 
-    if (text == '') return;
+    if (text == '') {
+        
+        return};
     todos.push({ text, time, priority, completed: false });
 
     input.value = '';
@@ -20,16 +23,15 @@ function addTODO() {
 }
 
 function sort() {
-   // const input = document.getElementById("todo-input");
-   
-
     todos.sort((a, b) => {
-        //if (a.text !== b.text) return a.text - b.text;
         return a.text.localeCompare(b.text);
     });
 
     saveTodos();
     renderTodos();
+}
+function validate() { //Event Handler
+    errorDiv.style.display = (event.target.value.trim() !== '') ? 'none' : 'inline';
 }
 
 function deleteTODO(index) {
@@ -45,11 +47,11 @@ function toggleComplete(index) {
 }
 
 function renderTodos() {
-    const list = document.getElementById('todo-list'); // FIXED ID
+    const list = document.getElementById('todo-list'); 
 
-    list.innerHTML = ""; // clear old list
+    list.innerHTML = ""; 
 
-    todos.forEach((todo, index) => { // FIXED spelling
+    todos.forEach((todo, index) => { 
         const li = document.createElement('li');
 
         if (todo.completed)

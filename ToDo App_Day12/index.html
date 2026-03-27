@@ -12,12 +12,12 @@
     <div>
         <h2>TODO App</h2>
 
-        <input type="text" id="todo-input" placeholder="Enter Task">
+        <input type="text" onkeyup="validate()" id="todo-input" placeholder="Enter task...">
         <input type="number" id="todo-time" placeholder="Enter Time">
         <button onclick="addTODO()">Add</button>
         <button onclick="sort()">sort</button>
 
-
+        <div class="error" id="error">Name is mandatory</div>
         <div class="priority">
             <label>
                 <input type="radio" name="priority" value="urgent">urgent
