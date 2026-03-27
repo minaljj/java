@@ -1,0 +1,25 @@
+const users = [
+    { name: 'A', role: "admin", salary: 50000 },
+    { name: 'B', role: "user", salary: 100000.01 },
+    { name: 'C', role: "user", salary: 100000.01 }
+];
+function groupBYSalary(users) {
+    const grouped = users.reduce((acc, users) => {
+        if (!acc[users.salary]) acc[users.salary] = [];
+        acc[users.salary].push(users);
+        return acc;
+    }, {});
+
+    console.log(grouped);
+}
+groupBYSalary(users)
+
+function groupBYRole(users) {
+    const grouped = users.reduce((acc, users) => {
+        if (!acc[users.role]) acc[users.role] = [];
+        acc[users.role].push(users);
+        return acc;
+    }, {});
+
+    console.log(grouped);
+}

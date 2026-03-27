@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../callbackExample"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Day13_JS"
+	}
+}
