@@ -3,34 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>TODO LIST</title>
+    <title>Todo App</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
-    <div>
-        <h2>TODO App</h2>
+    <div class="app">
+        <h2>Todo App</h2>
 
-        <input type="text" onkeyup="validate()" id="todo-input" placeholder="Enter task...">
-        <input type="number" id="todo-time" placeholder="Enter Time">
-        <button onclick="addTODO()">Add</button>
-        <button onclick="sort()">sort</button>
+        <input type="text" id="todo-input" placeholder="Enter task" onkeyup="validate()">
+        <div id="error">Task name is required</div>
 
-        <div class="error" id="error">Name is mandatory</div>
-        <div class="priority">
-            <label>
-                <input type="radio" name="priority" value="urgent">urgent
+        <input type="time" id="todo-time">
 
-            </label>
-            <label>
-                <input type="radio" name="priority" value="normal" checked>Not urgent
+        <select id="priority">
+            <option value="high">High</option>
+            <option value="medium" selected>Medium</option>
+            <option value="low">Low</option>
+        </select>
 
-            </label>
+        <div class="buttons">
+            <button onclick="addTODO()">Add</button>
+            <button onclick="sort()">Sort</button>
         </div>
+
         <ul id="todo-list"></ul>
     </div>
+
+    <script src="app.js"></script>
 </body>
-<script src="app.js"></script>
 
 </html>

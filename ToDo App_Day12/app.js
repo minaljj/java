@@ -1,70 +1,75 @@
 let todos = JSON.parse(localStorage.getItem('todos')) || []
-const errorDiv = document.getElementById('error');
+
+const errorDiv = document.getElementById('error')
+
 function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos))
 }
 
 function addTODO() {
-    const input = document.getElementById("todo-input");
-    const timeinput = document.getElementById("todo-time");
-    const priority = document.querySelector('input[name="priority"]:checked').value;
-    const text = input.value.trim();
-    const time = timeinput.value.trim();
+    const input = document.getElementById("todo-input")
+    const timeinput = document.getElementById("todo-time")
+    const priority = document.getElementById("priority").value
 
-    if (text == '') {
-        
-        return};
-    todos.push({ text, time, priority, completed: false });
+    const text = input.value.trim()
+    const time = timeinput.value.trim()
 
-    input.value = '';
-    timeinput.value = '';
-    saveTodos();
-    renderTodos();
+    if (text === '') return
+    if (time === '') return
+
+    todos.push({ text, time, priority, completed: false })
+
+    input.value = ''
+    timeinput.value = ''
+
+    saveTodos()
+    renderTodos()
 }
 
 function sort() {
-    todos.sort((a, b) => {
-        return a.text.localeCompare(b.text);
-    });
-
-    saveTodos();
-    renderTodos();
+    todos.sort((a, b) => a.text.localeCompare(b.text))
+    saveTodos()
+    renderTodos()
 }
-function validate() { //Event Handler
-    errorDiv.style.display = (event.target.value.trim() !== '') ? 'none' : 'inline';
+
+function validate() {
+    errorDiv.style.display = event.target.value.trim() ? 'none' : 'inline'
 }
 
 function deleteTODO(index) {
-    todos.splice(index, 1);
-    saveTodos();
-    renderTodos();
-
+    todos.splice(index, 1)
+    saveTodos()
+    renderTodos()
 }
+
 function toggleComplete(index) {
-    todos[index].completed = !todos[index].completed;
-    saveTodos();
-    renderTodos();
+    todos[index].completed = !todos[index].completed
+    saveTodos()
+    renderTodos()
 }
 
 function renderTodos() {
-    const list = document.getElementById('todo-list'); 
+    const list = document.getElementById('todo-list')
+    list.innerHTML = ""
 
-    list.innerHTML = ""; 
-
-    todos.forEach((todo, index) => { 
-        const li = document.createElement('li');
-
-        if (todo.completed)
-            li.classList.add('completed');
+    todos.forEach((todo, index) => {
+        const li = document.createElement('li')
+        if (todo.completed) li.classList.add('completed')
 
         li.innerHTML = `
-            <span>${todo.text} ${todo.time ? "(" + todo.time + "  hours) " : ""} ${todo.priority}</span> <!-- FIXED syntax -->
-            <div>
-                <button onclick="toggleComplete(${index})">✔</button> 
-                <button onclick="deleteTODO(${index})">✖</button> <!-- FIXED name -->
-            </div> 
-        `;
-
-        list.appendChild(li);
-    });
+            <div class="todo-text">
+                <strong>${todo.text}</strong>
+                <span>${todo.time}</span>
+                <span class="priority-tag ${todo.priority}">
+                    ${todo.priority}
+                </span>
+            </div>
+            <div class="actions">
+                <button onclick="toggleComplete(${index})">Done</button>
+                <button onclick="deleteTODO(${index})">Delete</button>
+            </div>
+        `
+        list.appendChild(li)
+    })
 }
+``
