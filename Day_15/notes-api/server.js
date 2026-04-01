@@ -5,6 +5,7 @@ const notesRoutes = require('./routes/notesRoutes');
 
 app.use(express.json());
 app.use('/notes', notesRoutes);
+
 app.listen(3001, () => {
   console.log('server started on port 3001');
 });

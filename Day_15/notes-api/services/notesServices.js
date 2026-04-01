@@ -1,9 +1,8 @@
-const { FILE } = require('dns');
-
 const fs = require('fs').promises;
+const FILE = './data/notes.json';
 
 async function getNotes() {
-  const data = await fs.readFile('./data/notes.json', 'utf-8');
+  const data = await fs.readFile(FILE, 'utf-8'); 
   return JSON.parse(data);
 }
 
