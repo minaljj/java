@@ -30,7 +30,7 @@ public class FileAccountRepository implements AccountRepository {
 		try {
 			mapper.writeValue(new File(FILE_NAME), account);
 		} catch (IOException e) {
-			throw new RuntimeException("File write error", e);
+			throw new RuntimeException("File write an error", e);
 		}
 
 	}
