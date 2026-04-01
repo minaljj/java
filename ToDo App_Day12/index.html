@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app">
+        <h2>Todo App</h2>
+
+        <input type="text" id="todo-input" placeholder="Enter task" onkeyup="validate()">
+        <div id="error">Task name is required</div>
+
+        <input type="time" id="todo-time">
+
+        <select id="priority">
+            <option value="high">High</option>
+            <option value="medium" selected>Medium</option>
+            <option value="low">Low</option>
+        </select>
+
+        <div class="buttons">
+            <button onclick="addTODO()">Add</button>
+            <button onclick="sort()">Sort</button>
+        </div>
+
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

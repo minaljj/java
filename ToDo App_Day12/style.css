@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.app {
+    background: white;
+    padding: 20px;
+    width: 360px;
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #1976d2;
+    color: white;
+}
+
+#todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+#todo-list li {
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.priority-tag {
+    font-size: 12px;
+    width: fit-content;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: white;
+}
+
+.priority-tag.high {
+    background: #e53935;
+}
+
+.priority-tag.medium {
+    background: #fb8c00;
+}
+
+.priority-tag.low {
+    background: #43a047;
+}
+
+.completed strong {
+    text-decoration: line-through;
+    color: gray;
+}
+
+#error {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+
+.actions button {
+    background: #555;
+}
