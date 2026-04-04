@@ -59,12 +59,9 @@ class BankServiceTest {
 		assertThrows(IllegalArgumentException.class, () -> bankService.withdraw(1, 2000));
 
 		verify(repository, never()).save(any());
-	}
-
-//
+		}
 
 	@Test
-
 	void testCreateAccountDuplicate() {
 		when(repository.findById(1)).thenReturn(account);
 

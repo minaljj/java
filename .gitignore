@@ -1,2 +1,12 @@
+<<<<<<< HEAD
 node_modules
+=======
+<<<<<<< HEAD
+
+**/*.class
+**/*.classpath
+=======
+node_modules
+>>>>>>> 29df8227cb21919c79159ef34eb5cc188ce287b3
+>>>>>>> 257817d (basic react)
 /.metadata/

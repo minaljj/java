@@ -19,7 +19,7 @@ public class FileAccountRepository implements AccountRepository {
 		try {
 			return mapper.readValue(new File(FILE_NAME), Account.class);
 		} catch (IOException e) {
-			throw new RuntimeException("File read error", e);
+			throw new RuntimeException("File read error");
 		}
 	}
 
@@ -30,7 +30,7 @@ public class FileAccountRepository implements AccountRepository {
 		try {
 			mapper.writeValue(new File(FILE_NAME), account);
 		} catch (IOException e) {
-			throw new RuntimeException("File write error", e);
+			throw new RuntimeException("File write an error", e);
 		}
 
 	}

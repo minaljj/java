@@ -52,7 +52,11 @@ public class LogAnalyzerTest {
 
         LogAnalyzer analyzer = new LogAnalyzer("System.log");
         Map<String, Integer> result = analyzer.analyze();
+<<<<<<< HEAD
+
+=======
        
+>>>>>>> 29df8227cb21919c79159ef34eb5cc188ce287b3
         assertEquals(1, result.get("INFO"));
         assertEquals(1, result.get("WARNING"));
         assertEquals(0, result.get("ERROR"));
@@ -60,7 +64,13 @@ public class LogAnalyzerTest {
 
     @Test
     void testMissingFileThrowsException() {
+<<<<<<< HEAD
+
         LogAnalyzer analyzer = new LogAnalyzer("missingFile.log");
+
+=======
+        LogAnalyzer analyzer = new LogAnalyzer("missingFile.log");
+>>>>>>> 29df8227cb21919c79159ef34eb5cc188ce287b3
         assertThrows(RuntimeException.class, () -> analyzer.analyze());
     }
 }
