@@ -1,62 +1,68 @@
 import { useState } from "react";
+import { addNoteApi } from "../services/api";
 
 function NoteForm({ addNote }) {
-    const [note, setNote] = useState({
-        title: "",
-        status: "open",
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [completed, setCompleted] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!title.trim()) return;
+
+    const res = await addNoteApi({
+      title,
+      description,
+      status: completed ? "completed" : "created",
+      date,
+      time,
+      createdAt: new Date().toISOString(),
     });
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    addNote(res.data);
 
-        if (!note.title.trim()) return;
+    // ✅ clear form
+    setTitle("");
+    setDescription("");
+    setDate("");
+    setTime("");
+    setCompleted(false);
+  };
 
-        addNote({
-            title: note.title.trim(),
-            status: note.status,
-        });
+  return (
+    <form className="note-form" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Enter title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
-        setNote({ title: "", status: "open" });
-    };
+      <textarea
+        placeholder="Enter description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
 
-    const handleChange = (event) => {
-        const { name, value, type, checked } = event.target;
+      <div className="date-time">
+        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+        <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
+      </div>
 
-        setNote((prevNote) => ({
-            ...prevNote,
-            [name]:
-                type === "checkbox"
-                    ? checked
-                        ? "closed"
-                        : "open"
-                    : value,
-        }));
-    };
+      <label className="checkbox-row">
+        <input
+          type="checkbox"
+          checked={completed}
+          onChange={(e) => setCompleted(e.target.checked)}
+        />
+        Completed
+      </label>
 
-    return (
-        <form className="note-form" onSubmit={handleSubmit}>
-            <input
-                className="note-input"
-                name="title"
-                placeholder="Enter note"
-                value={note.title}
-                onChange={handleChange}
-            />
-
-            <label className="checkbox-label">
-
-                <input
-                    type="checkbox"
-                    name="status"
-                    checked={note.status === "closed"}
-                    onChange={handleChange}
-                />
-                Closed
-            </label>
-
-            <button type="submit">Add</button>
-        </form>
-    );
+      <button>Add Note</button>
+    </form>
+  );
 }
 
 export default NoteForm;

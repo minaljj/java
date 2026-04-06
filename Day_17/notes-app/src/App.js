@@ -1,29 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState } from 'react';
-import NoteForm from './components/NoteForm';
-import NoteList from './components/NoteList';
+import { useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
+import NoteForm from "./components/NoteForm";
+import NoteList from "./components/NoteList";
+import { getNotes, deleteNoteApi } from "./services/api";
+import "./App.css";
 
 function App() {
   const [notes, setNotes] = useState([]);
 
+  useEffect(() => {
+    getNotes().then((res) => setNotes(res.data));
+  }, []);
+
   const addNote = (note) => {
-    const newNote = { ...note };
-    newNote.id = Date.now(),
-      setNotes([...notes, newNote]);
+    setNotes((prev) => [...prev, note]);
   };
 
   const deleteNote = (id) => {
-    setNotes(notes.filter((n) => n.id !== id));
-  }
-  return (
+    deleteNoteApi(id);
+    setNotes((prev) => prev.filter((n) => n.id !== id));
+  };
 
+  return (
     <div className="app">
-      <h1>Note App</h1>
+      <h1>Notes App</h1>
+      <Navbar />
+
       <NoteForm addNote={addNote} />
       <NoteList notes={notes} deleteNote={deleteNote} />
     </div>
-
   );
 }
 

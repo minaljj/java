@@ -1,11 +1,11 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
+const notesRoutes = require("./routes/notesRoutes");
+
 const app = express();
-const notesRoutes=require('./routes/notesRoutes');
-console.log('error',notesRoutes);
-
-
-app.use('/notes',notesRoutes);//middleware
+app.use(cors());
 app.use(express.json());
-app.listen(3001, ()=>{
-    console.log('server started');
-})
+app.use("/notes", notesRoutes);
+app.listen(3001, () => {
+  console.log("Server started at port 3001");
+});
