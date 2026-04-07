@@ -3,7 +3,7 @@ export const formatDate = (value) => {
   return new Date(value).toLocaleDateString("en-GB");
 };
 
-function NoteList({ notes, deleteNote, completeNote, onEdit }) {
+function NoteList({ notes, deleteNote, completeNote, toggleStatus,onEdit }) {
   return (
     <div className="table-container">
       <table className="notes-table">
@@ -24,7 +24,7 @@ function NoteList({ notes, deleteNote, completeNote, onEdit }) {
 
         <tbody>
           {notes.map((note, index) => (
-            <tr key={note.id}>
+            <tr key={note.id} >
               <td>{index + 1}</td>
               <td>{note.title}</td>
               <td>{note.description}</td>
@@ -40,6 +40,15 @@ function NoteList({ notes, deleteNote, completeNote, onEdit }) {
               </td>
 
               <td className="action-icons">
+
+                <button
+                  className={`icon-btn status ${note.status === "completed" ? "completed" : "created"
+                    }`}
+                  title="Toggle Status"
+                  onClick={() => toggleStatus(note.id)}
+                >
+                  {note.status === "completed" ? "✔" : "○"}
+                </button>
 
                 <button
                   className="icon-btn complete"

@@ -54,6 +54,17 @@
       "priority": 7,
       "time": "13:12",
       "createdAt": "2026-04-07T06:42:19.063Z"
+    },
+    {
+      "title": "core java",
+      "description": "Introduction ",
+      "status": "completed",
+      "startdate": "2026-04-08",
+      "endDate": "2026-04-09",
+      "priority": 0,
+      "time": "18:43",
+      "createdAt": "2026-04-07T10:13:09.347Z",
+      "id": "Zro4BAGQMQ8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

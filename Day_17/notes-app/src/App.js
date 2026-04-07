@@ -4,6 +4,7 @@ import NoteForm from "./components/NoteForm";
 import NoteList from "./components/NoteList";
 import { getNotes, deleteNoteApi } from "./services/api";
 import "./App.css";
+import StatusBarChart from "./components/StatusBarChart";
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -51,16 +52,18 @@ function App() {
       return 0;
     });
 
-    // const filteredNotes=[...notes].filter((note)=>note.title.toLowerCase().includes(search.toLocaleLowerCase))
-    // .sort((a,b)=>{
-    //   if(sortBy==="createAt")
-    //     return new Date(b.createdAt)-new Date(a.createdAt);
-    //   if(sortBy==="priority")
-    //     return (b.priority||0)-(a.priority||0);
-    //   if(sortBy==="title")
-    //     return a.title.localCompare(b.title);
-    //   return 0;
-    // })
+  const toggleStatus = (id) => {
+    setNotes((prev) =>
+      prev.map((note) =>
+        note.id === id
+          ? {
+            ...note,
+            status: note.status === "completed" ? "created" : "completed",
+          }
+          : note
+      )
+    );
+  };
 
   return (
     <div className="app">
@@ -71,6 +74,7 @@ function App() {
         setSearch={setSearch}
       />
 
+      {!showAdd && <StatusBarChart notes={notes} />}
       {!showAdd && (
         <div className="sort-container">
           <label>Sort By:</label>
@@ -88,6 +92,7 @@ function App() {
         <NoteList
           notes={filteredNotes}
           deleteNote={deleteNote}
+          toggleStatus={toggleStatus}
           onEdit={(note) => {
             setEditNote(note);
             setShowAdd(true);
