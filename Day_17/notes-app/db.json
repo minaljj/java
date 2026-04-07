@@ -2,48 +2,58 @@
   "notes": [
     {
       "title": "note",
-      "description": "day1",
+      "description": "draw",
       "status": "created",
-      "date": "2026-04-14",
-      "time": "16:20",
-      "createdAt": "2026-04-06T10:50:21.673Z",
-      "id": "PrwcaiipcAE"
-    },
-    {
-      "title": "note",
-      "description": "note",
-      "status": "created",
-      "date": "2026-04-02",
-      "time": "18:23",
-      "createdAt": "2026-04-06T10:53:27.685Z",
-      "id": "I2CZr2cQFAk"
-    },
-    {
-      "title": "note",
-      "description": "learn java",
-      "status": "completed",
-      "date": "2026-04-08",
-      "time": "06:28",
-      "createdAt": "2026-04-06T10:58:46.874Z",
-      "id": "AiyjmkXyzzw"
+      "startdate": "2026-04-08",
+      "endDate": "2026-04-09",
+      "priority": 0,
+      "time": "11:27",
+      "createdAt": "2026-04-07T04:57:21.963Z",
+      "id": "kvjiPszOnyE"
     },
     {
       "title": "note1",
-      "description": "write note",
-      "status": "completed",
-      "date": "2026-04-08",
-      "time": "18:31",
-      "createdAt": "2026-04-06T11:02:03.353Z",
-      "id": "HBrQkUeSz-U"
+      "description": "java",
+      "status": "created",
+      "startdate": "2026-04-08",
+      "endDate": "2026-04-08",
+      "priority": 5,
+      "time": "15:30",
+      "createdAt": "2026-04-07T07:00:48.480Z",
+      "id": "mWKR1RrLAFw"
     },
     {
-      "title": "note ",
-      "description": "note",
+      "id": "5jp7RpMcvQw",
+      "title": "Note1",
+      "description": "note2",
       "status": "created",
-      "date": "2026-04-08",
-      "time": "18:39",
-      "createdAt": "2026-04-06T11:09:12.928Z",
-      "id": "J8ZaWBqIYr8"
+      "startdate": "2026-04-15",
+      "endDate": "2026-04-14",
+      "priority": 7,
+      "time": "13:12",
+      "createdAt": "2026-04-07T06:42:19.063Z"
+    },
+    {
+      "id": "19ErVx34AEs",
+      "title": "java",
+      "description": "Day12",
+      "status": "created",
+      "startdate": "2026-04-08",
+      "endDate": "2026-04-08",
+      "priority": 5,
+      "time": "15:30",
+      "createdAt": "2026-04-07T07:00:48.480Z"
+    },
+    {
+      "id": "g5KUfI9Q8Rs",
+      "title": "React",
+      "description": "Day13",
+      "status": "created",
+      "startdate": "2026-04-15",
+      "endDate": "2026-04-14",
+      "priority": 7,
+      "time": "13:12",
+      "createdAt": "2026-04-07T06:42:19.063Z"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
