@@ -55,7 +55,7 @@ test("does not show error when answer and confirm answer match", async () => {
     ).not.toBeInTheDocument();
   });
 });
-test("hide answers checkbox is rendered", () => {
+test("hide answers checkbox is rendered ", () => {
   render(<SecurityQuestionsForm />);
 
   expect(
