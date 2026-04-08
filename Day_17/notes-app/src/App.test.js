@@ -17,28 +17,22 @@ test("adds and deletes note", async () => {
 
   render(<App />);
 
-  // open form
   fireEvent.click(screen.getByText(/add/i));
 
-  // enter title
   fireEvent.change(screen.getByPlaceholderText(/enter task/i), {
     target: { value: "New Note" }
   });
 
-  // submit
   fireEvent.click(
     screen.getByRole("button", { name: /add note/i })
   );
 
-  // wait for add
   await waitFor(() => {
     expect(screen.getByText(/new note/i)).toBeInTheDocument();
   });
 
-  // delete
   fireEvent.click(screen.getByTitle("Delete"));
 
-  // wait for removal
   await waitFor(() => {
     expect(screen.queryByText(/new note/i)).not.toBeInTheDocument();
   });
