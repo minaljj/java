@@ -4,7 +4,8 @@ function SecurityQuestionRow({
   questions,
   hide,
   onChange,
-  error
+  error,
+  selectedQuestionIds
 }) {
   const type = hide ? 'password' : 'text';
 
@@ -19,11 +20,18 @@ function SecurityQuestionRow({
           }
         >
           <option value="">Select Question</option>
-          {questions.map(q => (
-            <option key={q.id} value={q.id}>
-              {q.question}
-            </option>
-          ))}
+
+          {questions
+            .filter(
+              q =>
+                !selectedQuestionIds.includes(q.id) ||
+                q.id === data.questionId
+            )
+            .map(q => (
+              <option key={q.id} value={q.id}>
+                {q.question}
+              </option>
+            ))}
         </select>
 
         <input
@@ -32,6 +40,7 @@ function SecurityQuestionRow({
           value={data.answer}
           style={{ width: '150px', marginRight: '10px' }}
           onChange={e => onChange(index, 'answer', e.target.value)}
+          onBlur={() => onChange(index, 'answerBlur')}
         />
 
         <input
@@ -42,11 +51,18 @@ function SecurityQuestionRow({
           onChange={e =>
             onChange(index, 'confirmAnswer', e.target.value)
           }
+          onBlur={() => onChange(index, 'confirmBlur')}
         />
       </div>
 
       {error && (
-        <div style={{ color: 'red', marginLeft: '270px', fontSize: '13px' }}>
+        <div
+          style={{
+            color: 'red',
+            marginLeft: '270px',
+            fontSize: '13px'
+          }}
+        >
           {error}
         </div>
       )}

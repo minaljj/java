@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
 import SecurityQuestionRow from './components/SecurityQuestionRow';
 
+const MIN_LENGTH = 3;
+
 function SecurityQuestionsForm() {
   const [questions, setQuestions] = useState([]);
   const [hide, setHide] = useState(true);
-  const [message, setMessage] = useState('');
-  const [rowErrors, setRowErrors] = useState(Array(5).fill(''));
 
   const [form, setForm] = useState(
     Array.from({ length: 5 }, () => ({
       questionId: '',
       answer: '',
-      confirmAnswer: ''
+      confirmAnswer: '',
+      answerTouched: false,
+      confirmTouched: false
     }))
   );
+  
+  const [rowErrors, setRowErrors] = useState(Array(5).fill(''));
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:3000/api/questions')
@@ -21,47 +26,66 @@ function SecurityQuestionsForm() {
       .then(setQuestions);
   }, []);
 
+  useEffect(() => {
+    const valid =
+      form.every(
+        r =>
+          r.questionId &&
+          r.answer.length >= MIN_LENGTH &&
+          r.answer === r.confirmAnswer
+      ) && rowErrors.every(e => e === '');
+
+    setIsFormValid(valid);
+  }, [form, rowErrors]);
+
   const handleChange = (index, field, value) => {
-    const formCopy = [...form];
-    formCopy[index][field] = value;
-    setForm(formCopy);
+    const copy = [...form];
+    const errors = [...rowErrors];
 
-    const errorCopy = [...rowErrors];
+    if (field === 'answerBlur') {
+      copy[index].answerTouched = true;
+    } else if (field === 'confirmBlur') {
+      copy[index].confirmTouched = true;
+    } else {
+      copy[index][field] = value;
+    }
 
-    if (field === 'answer' || field === 'confirmAnswer') {
-      if (
-        formCopy[index].answer &&
-        formCopy[index].confirmAnswer &&
-        formCopy[index].answer !== formCopy[index].confirmAnswer
-      ) {
-        errorCopy[index] = 'Answers do not match';
+    const { answer, confirmAnswer, answerTouched, confirmTouched } =
+      copy[index];
+
+    if (answerTouched) {
+      if (!answer) {
+        errors[index] = 'Answer is required';
+      } else if (answer.length < MIN_LENGTH) {
+        errors[index] = `Minimum ${MIN_LENGTH} characters required`;
       } else {
-        errorCopy[index] = '';
+        errors[index] = '';
       }
     }
 
-    setRowErrors(errorCopy);
-  };
-
-  const submit = () => {
-    setMessage('');
-
-    if (rowErrors.some(err => err !== '')) {
-      setMessage('Fix the errors before submitting');
-      return;
+    if (confirmTouched) {
+      if (!confirmAnswer) {
+        errors[index] = 'Confirm Answer is required';
+      } else if (answer !== confirmAnswer) {
+        errors[index] = 'Answers do not match';
+      }
     }
 
-    fetch('http://localhost:3000/api/security-questions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userId: 'user123',
-        questions: form
-      })
-    })
-      .then(res => res.json())
-      .then(data => setMessage(data.message));
+    if (field === 'questionId') {
+      copy[index].answer = '';
+      copy[index].confirmAnswer = '';
+      copy[index].answerTouched = false;
+      copy[index].confirmTouched = false;
+      errors[index] = '';
+    }
+
+    setForm(copy);
+    setRowErrors(errors);
   };
+
+  const selectedQuestionIds = form
+    .map(f => f.questionId)
+    .filter(Boolean);
 
   return (
     <div style={{ width: '800px', margin: '40px auto' }}>
@@ -76,6 +100,7 @@ function SecurityQuestionsForm() {
           hide={hide}
           onChange={handleChange}
           error={rowErrors[i]}
+          selectedQuestionIds={selectedQuestionIds}
         />
       ))}
 
@@ -89,11 +114,8 @@ function SecurityQuestionsForm() {
       </label>
 
       <br /><br />
-      <button onClick={submit}>Update</button>
 
-      {message && (
-        <p style={{ color: 'green', fontWeight: 'bold' }}>{message}</p>
-      )}
+      <button disabled={!isFormValid}>Update</button>
     </div>
   );
 }
