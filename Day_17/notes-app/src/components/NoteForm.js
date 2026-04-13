@@ -4,7 +4,7 @@ import { addNoteApi } from "../services/api";
 function NoteForm({ addNote, editNote }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [startdate, setstartDate] = useState("");
+  const [startdate, setstartdate] = useState("");
   const [endDate, setendDate] = useState("");
   const [time, setTime] = useState("");
   const [completed, setCompleted] = useState(false);
@@ -14,10 +14,10 @@ function NoteForm({ addNote, editNote }) {
     if (editNote) {
       setTitle(editNote.title || "");
       setDescription(editNote.description || "");
-      setstartDate(editNote.startdate || "");
+      setstartdate(editNote.startDate || "");
       setendDate(editNote.endDate || "");
       setTime(editNote.time || "");
-      setCompleted(editNote.status === "completed");
+      setCompleted(editNote.status === "CLOSED");
       setPriority(editNote.priority || 0);
     }
   }, [editNote]);
@@ -30,8 +30,9 @@ function NoteForm({ addNote, editNote }) {
       id: editNote?.id,
       title,
       description,
-      status: completed ? "completed" : "created",
-      startdate,
+      content: description,
+      status: completed ? "CLOSED" : "CREATED",
+      startDate: startdate,
       endDate,
       priority,
       time,
@@ -40,6 +41,7 @@ function NoteForm({ addNote, editNote }) {
 
     addNote(res.data);
   };
+
 
   return (
     <form className="note-form" onSubmit={handleSubmit}>
@@ -75,7 +77,7 @@ function NoteForm({ addNote, editNote }) {
           <input
             type="date"
             value={startdate}
-            onChange={(e) => setstartDate(e.target.value)}
+            onChange={(e) => setstartdate(e.target.value)}
           />
         </div>
 

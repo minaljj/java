@@ -1,23 +1,30 @@
 package com.example.demo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Note;
+import com.example.demo.repository.NotesRepository;
 
-@Service 
+@Service
 public class NotesService {
-	public Note getNotes() {
-		Note note=new Note();
-		note.setId(1234);
-		note.setTitle("Test Note Title");
-		note.setContent("Test Note content");
-		return note;
-		
+
+	@Autowired
+	private NotesRepository notesRepository;
+
+	public Iterable<Note> getNotes() {
+		return notesRepository.findAll();
 	}
-	
-	public void setNote(Note note) {
-		System.out.println(note.getId());
-		System.out.println(note.getTitle());
-		
+
+	public Note createNote(Note note) {
+		return notesRepository.save(note);
+	}
+
+	public Note updateNote(Note note) {
+		return notesRepository.save(note);
+	}
+
+	public void deleteNote(Long id) {
+		notesRepository.deleteById(id);
 	}
 }

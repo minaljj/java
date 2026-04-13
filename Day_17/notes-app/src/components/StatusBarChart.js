@@ -18,15 +18,15 @@ ChartJS.register(
 
 function StatusBarChart({ notes }) {
   const createdCount = notes.filter(
-    (n) => n.status === "created"
+    (n) =>n.status === "CREATED"
   ).length;
 
   const completedCount = notes.filter(
-    (n) => n.status === "completed"
+    (n) => n.status === "CLOSED"
   ).length;
 
   const data = {
-    labels: ["Created", "Completed"],
+    labels: ["CREATED", "CLOSED"],
     datasets: [
       {
         label: "Tasks",

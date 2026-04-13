@@ -16,6 +16,7 @@ public class GlobalException {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleExceptions(Exception ex) {
+    	ex.printStackTrace();
         return "Something went wrong";
     }
 

@@ -1,11 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entity.Note;
 import com.example.demo.service.NotesService;
@@ -13,18 +9,31 @@ import com.example.demo.service.NotesService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(path="/notes")
+@RequestMapping("/notes")
+@CrossOrigin(origins = "http://localhost:3000")
 public class NotesController {
-	
+
 	@Autowired
-	NotesService noteService;
+	private NotesService noteService;
+
 	@GetMapping
-	Note getNotes() {
+	public Iterable<Note> getNotes() {
 		return noteService.getNotes();
 	}
-	
+
 	@PostMapping
-	void setNote(@RequestBody @Valid  Note note) {
-		noteService.setNote(note);
+	public Note createNote(@RequestBody @Valid Note note) {
+		return noteService.createNote(note);
+	}
+
+	@PutMapping("/{id}")
+	public Note updateNote(@PathVariable Long id, @RequestBody Note note) {
+		note.setId(id);
+		return noteService.updateNote(note);
+	}
+
+	@DeleteMapping("/{id}")
+	public void deleteNote(@PathVariable Long id) {
+		noteService.deleteNote(id);
 	}
 }

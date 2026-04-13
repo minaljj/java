@@ -3,7 +3,7 @@ export const formatDate = (value) => {
   return new Date(value).toLocaleDateString("en-GB");
 };
 
-function NoteList({ notes, deleteNote, completeNote, toggleStatus,onEdit }) {
+function NoteList({ notes, deleteNote, toggleStatus, onEdit }) {
   return (
     <div className="table-container">
       <table className="notes-table">
@@ -24,13 +24,13 @@ function NoteList({ notes, deleteNote, completeNote, toggleStatus,onEdit }) {
 
         <tbody>
           {notes.map((note, index) => (
-            <tr key={note.id} >
+            <tr key={note.id}>
               <td>{index + 1}</td>
               <td>{note.title}</td>
               <td>{note.description}</td>
               <td>{note.priority ?? "-"}</td>
-              <td>{note.status.toUpperCase()}</td>
-              <td>{formatDate(note.startdate)}</td>
+              <td>{note.status}</td>
+              <td>{formatDate(note.startDate)}</td>
               <td>{formatDate(note.endDate)}</td>
               <td>{note.time || "-"}</td>
               <td>
@@ -40,42 +40,28 @@ function NoteList({ notes, deleteNote, completeNote, toggleStatus,onEdit }) {
               </td>
 
               <td className="action-icons">
-
                 <button
-                  className={`icon-btn status ${note.status === "completed" ? "completed" : "created"
-                    }`}
-                  title="Toggle Status"
+                  className={`icon-btn status ${
+                    note.status === "CLOSED" ? "completed" : "created"
+                  }`}
                   onClick={() => toggleStatus(note.id)}
                 >
-                  {note.status === "completed" ? "✔" : "○"}
-                </button>
-
-                <button
-                  className="icon-btn complete"
-                  title="Complete"
-                  onClick={() => completeNote(note.id)}
-                  disabled={note.status === "completed"}
-                >
-                  ✅
+                  {note.status === "CLOSED" ? "✔" : "○"}
                 </button>
 
                 <button
                   className="icon-btn edit"
-                  title="Edit"
                   onClick={() => onEdit(note)}
                 >
                   ✏️
                 </button>
 
-
                 <button
                   className="icon-btn delete"
-                  title="Delete"
                   onClick={() => deleteNote(note.id)}
                 >
                   🗑️
                 </button>
-
               </td>
             </tr>
           ))}

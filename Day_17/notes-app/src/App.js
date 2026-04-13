@@ -58,7 +58,7 @@ function App() {
         note.id === id
           ? {
             ...note,
-            status: note.status === "completed" ? "created" : "completed",
+            status: note.status === "CLOSED" ? "CREATED" : "CLOSED",
           }
           : note
       )
