@@ -1,44 +1,52 @@
 package com.example.demo.entity;
+ 
+import java.util.ArrayList;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.Valid;
+ 
 @Entity
+
 public class Order1 {
-	@GeneratedValue(strategy = GenerationType.AUTO)
+ 
 	@Id
-	private int id;
-	@NotBlank
-	private String item;
-	@Min(value=1)
-	private float price;
-	private int quantity;
-	@Min(value=1)
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	public int getId() {
+
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	private Integer id;
+ 
+	@Valid
+
+	@OneToMany(mappedBy = "order1", cascade = CascadeType.ALL, orphanRemoval = true)
+
+	@JsonManagedReference
+
+	private List<OrderLine> orderLines = new ArrayList<>();
+ 
+	public Integer getId() {
+
 		return id;
+
 	}
-	public void setId(int id) {
+ 
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getItem() {
-		return item;
+	public List<OrderLine> getOrderLines() {
+
+		return orderLines;
 	}
-	public void setItem(String item) {
-		this.item = item;
-	}
-	public float getPrice() {
-		return price;
-	}
-	public void setPrice(float price) {
-		this.price = price;
+	public void setOrderLines(List<OrderLine> orderLines) {
+
+		this.orderLines = orderLines;
 	}
 }
+ 

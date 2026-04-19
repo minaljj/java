@@ -45,12 +45,8 @@ public class NoteController {
 		noteService.deleteOrderById(id);
 	}
 
-	@PostMapping("/notes")
-	Integer createOrder(@RequestBody @Valid Order1 order1) throws IOException {
-		System.out.println(order1.getPrice());
-		System.out.println(order1.getItem());
-		System.out.println(order1.getQuantity());
-
+	@PostMapping()
+	Integer createOrder(@RequestBody @Valid Order1 order1) throws IOException  {
 		return noteService.addOrder(order1);
 	}
 	

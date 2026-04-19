@@ -1,0 +1,68 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+}
+
+.order-container {
+  width: 420px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.input-group {
+  display: flex;
+  gap: 6px;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 6px;
+}
+
+.input-group button {
+  padding: 6px 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.item-list li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-btn:disabled {
+  background: gray;
+}
+
+.success-msg {
+  text-align: center;
+  color: green;
+  margin-top: 10px;
+}
