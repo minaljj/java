@@ -1,22 +1,57 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "./App";
-import "@testing-library/jest-dom";
+import * as api from "./services/api";
 
-test("adds and deletes a note", () => {
+jest.mock("./services/api");
+
+jest.mock("./components/StatusBarChart", () => () => (
+  <div>Mock Chart</div>
+));
+
+test("adds and deletes note", async () => {
+  api.getNotes.mockResolvedValue({ data: [] });
+
+  api.addNoteApi.mockResolvedValue({
+    data: { id: 1, title: "New Note", status: "created" }
+  });
+
   render(<App />);
 
-  fireEvent.change(screen.getByPlaceholderText(/enter note/i), {
-    target: { value: "New Note" },
+  fireEvent.click(screen.getByText(/add/i));
+
+  fireEvent.change(screen.getByPlaceholderText(/enter task/i), {
+    target: { value: "New Note" }
   });
-  fireEvent.click(screen.getByRole("button", { name: /add/i }));
 
-  expect(
-    screen.getByText(/new note — open/i)
-  ).toBeInTheDocument();
+  fireEvent.click(
+    screen.getByRole("button", { name: /add note/i })
+  );
 
-  fireEvent.click(screen.getByText(/delete/i));
-  expect(
-    screen.queryByText(/new note — open/i)
-  ).not.toBeInTheDocument();
+  await waitFor(() => {
+    expect(screen.getByText(/new note/i)).toBeInTheDocument();
+  });
+
+  fireEvent.click(screen.getByTitle("Delete"));
+
+  await waitFor(() => {
+    expect(screen.queryByText(/new note/i)).not.toBeInTheDocument();
+  });
 });
-``
+
+
+// test("adds and deletes note", () => {
+//   render(<App />);
+//   const inputEntry = "New Note";
+
+//   fireEvent.change(screen.getByPlaceholderText(/Enter task/i), {
+//     target: { value: inputEntry }
+//   });
+
+//   fireEvent.click(screen.getByText(/add/i));
+
+//   expect(screen.getByText(new RegExp(inputEntry, "i"))).toBeInTheDocument();
+
+//   fireEvent.click(screen.getByText(/delete/i));
+
+//   expect(screen.queryByText(new RegExp(inputEntry, "i"))).not.toBeInTheDocument();
+// });

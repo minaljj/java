@@ -1,0 +1,71 @@
+{
+  "notes": [
+    {
+      "title": "note",
+      "description": "draw",
+      "status": "created",
+      "startdate": "2026-04-08",
+      "endDate": "2026-04-09",
+      "priority": 0,
+      "time": "11:27",
+      "createdAt": "2026-04-07T04:57:21.963Z",
+      "id": "kvjiPszOnyE"
+    },
+    {
+      "title": "note1",
+      "description": "java",
+      "status": "created",
+      "startdate": "2026-04-08",
+      "endDate": "2026-04-08",
+      "priority": 5,
+      "time": "15:30",
+      "createdAt": "2026-04-07T07:00:48.480Z",
+      "id": "mWKR1RrLAFw"
+    },
+    {
+      "id": "5jp7RpMcvQw",
+      "title": "Note1",
+      "description": "note2",
+      "status": "created",
+      "startdate": "2026-04-15",
+      "endDate": "2026-04-14",
+      "priority": 7,
+      "time": "13:12",
+      "createdAt": "2026-04-07T06:42:19.063Z"
+    },
+    {
+      "id": "19ErVx34AEs",
+      "title": "java",
+      "description": "Day12",
+      "status": "created",
+      "startdate": "2026-04-08",
+      "endDate": "2026-04-08",
+      "priority": 5,
+      "time": "15:30",
+      "createdAt": "2026-04-07T07:00:48.480Z"
+    },
+    {
+      "id": "g5KUfI9Q8Rs",
+      "title": "React",
+      "description": "Day13",
+      "status": "created",
+      "startdate": "2026-04-15",
+      "endDate": "2026-04-14",
+      "priority": 7,
+      "time": "13:12",
+      "createdAt": "2026-04-07T06:42:19.063Z"
+    },
+    {
+      "title": "core java",
+      "description": "Introduction ",
+      "status": "completed",
+      "startdate": "2026-04-08",
+      "endDate": "2026-04-09",
+      "priority": 0,
+      "time": "18:43",
+      "createdAt": "2026-04-07T10:13:09.347Z",
+      "id": "Zro4BAGQMQ8"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
