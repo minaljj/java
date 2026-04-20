@@ -1,44 +1,52 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import AuthService from "../services/auth.service";
+import "../Auth.css";
 
-export default function Login() {
+function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    AuthService.login(username, password).then(
-      () => {
-        window.location.href = "/profile";
-      },
-      () => {
-        setMessage("Invalid username or password");
-      }
-    );
+    AuthService.login(username, password);
   };
 
   return (
-    <form className="container" onSubmit={handleLogin}>
-      <h3>Login</h3>
+    <div className="auth-page">
+      <div className="auth-card">
 
-      <input
-        type="text"
-        placeholder="Username"
-        onChange={e => setUsername(e.target.value)}
-        required
-      />
+        <div className="auth-nav">
+          <Link to="/">Home</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </div>
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={e => setPassword(e.target.value)}
-        required
-      />
+        <h2>Login</h2>
 
-      <button>Login</button>
-      <p className="message">{message}</p>
-    </form>
+        <form className="auth-form" onSubmit={handleLogin}>
+          <input
+            type="text"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button className="auth-btn" type="submit">
+            Login
+          </button>
+        </form>
+
+      </div>
+    </div>
   );
 }
+
+export default Login;

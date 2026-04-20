@@ -1,29 +1,43 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import "./App.css";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import Login from "./components/login.component";
-import Register from "./components/register.component";
+import Home from "./components/Home";
 import Profile from "./components/profile.component";
-import Home from "./components/home.component";
-import AuthService from "./services/auth.service";
+import OrderForm from "./components/OrderForm";
+import OrderList from "./components/OrderList";
+import Register from "./components/register.component";
+import authService from "./services/auth.service";
+import "./App.css";
+import "./Auth.css";
+function App() {
+  const [currentUser, setCurrentUser] = useState(null);
 
-export default function App() {
-  const user = AuthService.getCurrentUser();
+  useEffect(() => {
+    const user = authService.getCurrentUser();
+    if (user) setCurrentUser(user);
+  }, []);
+
+  const logout = () => {
+    authService.logout();
+    window.location.href = "/login";
+  };
 
   return (
-    <Router>
+    <BrowserRouter>
       <nav>
-        <Link to="/">Home</Link>
+        <Link to="/">Home</Link>{" | "}
 
-        {user ? (
+        {currentUser ? (
           <>
-            <Link to="/profile">Profile</Link>
-            <a href="/login" onClick={() => AuthService.logout()}>Logout</a>
+            <Link to="/profile">Profile</Link>{" | "}
+            <Link to="/order">Create Order</Link>{" | "}
+            <Link to="/orders">Order List</Link>{" | "}
+            <a href="/login" onClick={logout}>Logout</a>
           </>
         ) : (
           <>
-            <Link to="/login">Login</Link>
+            <Link to="/login">Login</Link>{" | "}
             <Link to="/register">Register</Link>
           </>
         )}
@@ -32,9 +46,13 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/order" element={<OrderForm />} />
+        <Route path="/orders" element={<OrderList />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
+
+export default App;

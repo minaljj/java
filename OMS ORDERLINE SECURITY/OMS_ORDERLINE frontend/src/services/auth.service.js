@@ -1,13 +1,16 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL + "/auth/";
-console.log("API URL =", process.env.REACT_APP_API_URL);
+const API_URL = "http://localhost:8080/api/auth/";
+
 class AuthService {
 
+  register(data) {
+    return axios.post(API_URL + "signup", data);
+  }
   login(username, password) {
     return axios
       .post(API_URL + "signin", { username, password })
-      .then(response => {
+      .then((response) => {
         if (response.data.token) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
@@ -17,14 +20,6 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user");
-  }
-
-  register(username, email, password) {
-    return axios.post(API_URL + "signup", {
-      username,
-      email,
-      password
-    });
   }
 
   getCurrentUser() {

@@ -1,12 +1,16 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import OrderForm from "./Component/OrderForm";
+import Login from "./components/Login";
 
 function App() {
   return (
-    <div>
-      <h2>Create Order</h2>
-      <OrderForm />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/order" element={<OrderForm />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,33 +1,70 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import AuthService from "../services/auth.service";
+import "../Auth.css";
 
-export default function Register() {
-
+function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [role, setRole] = useState("ROLE_USER");
 
   const handleRegister = (e) => {
     e.preventDefault();
 
-    AuthService.register(username, email, password).then(
-      () => setMessage("User registered successfully"),
-      () => setMessage("Registration failed")
-    );
+    AuthService.register({
+      username,
+      email,
+      password,
+      roles: [role],
+    });
   };
 
   return (
-    <form className="container" onSubmit={handleRegister}>
-      <h3>Register</h3>
+    <div className="auth-page">
+      <div className="auth-card">
 
-      <input placeholder="Username" onChange={e => setUsername(e.target.value)} />
-      <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
-      <input placeholder="Password" type="password"
-             onChange={e => setPassword(e.target.value)} />
+        <div className="auth-nav">
+          <Link to="/">Home</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </div>
 
-      <button>Register</button>
-      <p className="message">{message}</p>
-    </form>
+        <h2>Register</h2>
+
+        <form className="auth-form" onSubmit={handleRegister}>
+          <input
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+
+          <input
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <select onChange={(e) => setRole(e.target.value)}>
+            <option value="ROLE_USER">User</option>
+            <option value="ROLE_ADMIN">Admin</option>
+          </select>
+
+          <button className="auth-btn" type="submit">
+            Register
+          </button>
+        </form>
+
+      </div>
+    </div>
   );
 }
+
+export default Register;
